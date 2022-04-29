@@ -1,0 +1,64 @@
+class RFC:
+    
+    def __init__(self, nombre, ap, am, anno, mes, dia):
+        self.nombre = nombre
+        self.apa = ap
+        self.ama = am
+        self.ann = anno
+        self.mes = mes
+        self.dia = dia
+
+    def calcularRFC(self):
+        vocales = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+        a = []
+
+        for i in range(0, 10, 1):
+            a.append(self.apa.find(vocales[i]))
+        a.sort()
+        b = a.copy()
+        for i in range(0, len(a), 1):
+            if a[i] == -1:
+                b.remove(-1)
+        rfc = self.apa[0] + self.apa[b[0]] + self.ama[0] + self.nombre[0] + self.ann[2] + self.ann[3] + self.mes + self.dia
+
+        completo = self.nombre + " " + self.apa + " " + self.ama
+        numeros = "0"
+        for i in range(0, len(completo), 1):
+            tabla = "0123456789&ABCDEFGHIJ0KLMNOPQR00STUVWXYZÑ"
+            if completo[i] == " ":
+                numeros = numeros + "00"
+            for j in range(0, 40, 1):
+                if completo[i] == tabla[j]:
+                    numeros = numeros + str(j)
+        suma = 0
+        multi = 0
+        s = ""
+        for i in range(0, len(numeros)-1, 1):
+            s = numeros[i] + numeros[i+1]
+            multi = int(s)*int(numeros[i+1])
+            suma = suma + multi
+        d = str(suma)
+        k = len(d)
+        l=d[k-3]+d[k-2]+d[k-1]
+        sum = int(l)
+        cociente = int(sum/34)
+        residuo = sum%34
+        claveRes="0"
+        claveCos="0"
+        for i in range(0, 34, 1):
+            clave= "123456789ABCDEFGHIJKLMNPQRSTUVWXYZ"
+            if i == cociente:
+                claveCos=clave[i]
+            if i == residuo:
+                claveRes=clave[i]
+        rfc = rfc + claveCos + claveRes
+        print(rfc)
+
+nombre= input("Ingrese su nombre: ")
+aP= input("Ingrese su apellido paterno: ")
+aM= input("Ingrese su apellido materno: ")
+an= input("Ingrese su año de nacimiento: ")
+mes= input("Ingrese su mes de nacimiento (en numeros, ej: 03, 07, 10): ")
+dia= input("Ingrese su dia de nacimiento: ")
+RF = RFC(nombre.upper(), aP.upper(), aM.upper(), an, mes, dia)
+RF.calcularRFC()
