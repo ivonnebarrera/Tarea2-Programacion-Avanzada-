@@ -1,0 +1,30 @@
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+
+vo=float(input("Ingrese la velocidad inicial: "))
+ang=float(input("Ingresa el angulo inicial (grados): "))
+ho=float(input("Ingrese la altura inicial del pyoyectil: "))
+g=float(input("Ingrese la gravedad que afectara al proyectil: "))
+
+ang=ang*(np.pi/180)
+
+t=(2*vo*np.sin(ang))/g
+
+vx=vo*np.cos(ang)
+
+vy=vo*np.sin(ang)
+
+t=math.ceil(t)
+x=np.zeros(int(t+1))
+y=np.zeros(int(t+1))
+
+z=open("datos_parabola.txt","w")
+z.write("DATOS GENERADOS: \ntiempo de vuelo(seg) || posicion en x || posicion en y")
+for i in range(int(t)):
+    x[i]=vx*i
+    y[i]=ho + vy*i - 0.5*g*i*i
+    z.write("\n"+str(i) + " ||  "+ str(x[i])+ " || "+ str(y[i]))
+
+z.close()
+plt.scatter(x,y,color='pink')
