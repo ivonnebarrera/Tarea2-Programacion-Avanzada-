@@ -1,0 +1,31 @@
+import numpy as np
+import os
+
+def funcion(x):
+    y = pow(x,3)-(6*pow(x,2))+(11*x)-6
+    return y
+
+file = open("Funciones.txt","w")
+file.write("h       Valor_Integral             Error\n")
+b = float(input("Introduce el límite superior: "))
+a = float(input("Introduce el límete inferior: "))
+n = int(input("Introduce el número de trapecios: "))
+
+x = np.zeros([n+1])
+h = (b-a)/n
+x[0] = a
+x[n] = b
+suma = 0
+e = -(pow((b-a),3)/12)
+
+for i in np.arange(1,n):
+    x[i] = x[i-1]+h
+    suma = suma+funcion(x[i])
+    ax = i
+    
+integral = (h/2)*(funcion(x[0])+2*suma+funcion(x[n]))+e
+
+print("El resultado de la integral es: ",integral)
+
+file = open("Funciones.txt","a")
+file.write("\n"+"{0}    {1}    {2}\n".format(h,integral,e))
