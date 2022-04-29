@@ -1,0 +1,19 @@
+import random
+palos = ["corazon","diamante","trebol","picas"]
+rangos = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"]
+cartas_por_jugador = 5
+
+def draw_cartas():
+    carta = random.choice(rangos) + ' ' +str(random.choice(palos))
+    return [carta]
+
+
+def stay_cartas(): 
+    i = 0
+    jugador = 1
+    while i < len(rangos) and i < cartas_por_jugador*2:
+        print("carta del jugador", jugador, ":" , draw_cartas())
+        i = i + 1 
+        if(i == cartas_por_jugador):
+            jugador = jugador + 1        
+stay_cartas()
