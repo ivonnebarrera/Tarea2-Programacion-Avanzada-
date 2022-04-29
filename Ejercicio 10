@@ -1,0 +1,47 @@
+    for i in range(len(m1)):
+        cifrar[i]=(m1[i]**e)%n
+    return cifrar
+
+def descifrado(frase,e,d):
+    descifrar=[None]*len(frase)
+    for i in range(len(frase)):
+        descifrar[i]=(frase[i]**d)%n
+    return descifrar
+           
+archivo=open("cifrado.txt","w")
+p=int(input("ingrese P : "))
+q=int(input("ingrese Q : "))
+
+if p==q:
+   print("P debe ser diferente a Q")
+else:
+    n=p*q
+    o=(p-1)*(q-1)
+    e=int(input("Ingrese el valor de e :   "))
+    clave_publica=[e,n]            
+    
+    k=int(input("Ingrese el valor de k: "))
+    d=(1+ k*o)//e                                                     
+    clave_privada=[d,n]
+        
+    m=str(input("Ingrese la frase a cifrar: "))
+    m=m.lower()
+    
+    m1=[None]*len(m)
+    for i in range(len(m)):                                     
+       if(ord(m[i])==32):
+          m1[i]=0
+       else:
+          m1[i]=ord(m[i])-97
+    
+    cifrar=cifrado(m1,e,n)
+    desifrar=desifrado(cifrar,e,d)
+    print("\nSu cifrado es: " + str(cifrar))
+    print("Su descifrado es: "+ str(desifrar))
+        
+    archivo=open("cifrado.txt","r")
+    archivo.write("Cadena cifrada: ")
+    for i in range(len(cifrar)):
+        archivo.write("  "+ str(cifrar[i]))
+    
+    archivo.close()
