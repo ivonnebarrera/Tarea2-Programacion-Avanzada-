@@ -1,0 +1,72 @@
+def New(f,df,x1,error):
+    arch = open("archivo.txt", "w")
+    x2 = x1
+    i = 0;
+    print("{:12}\t{:12}\t{:12}".format('i','xi','ε '))
+    txt = "i                   |xi                 |e"
+    arch.write(txt +'\n')
+    while True:
+        i = i + 1;
+        try:
+            x2 = x1 - f(x1)/df(x1) 
+        except ZeroDivisionError:
+            print("Raiz erronea/incalculable")
+            break
+        print("{:f}      |{:f}      |{:f}      ".format(i,x2,abs(x2-x1) ))
+        txt1 = "{:f}      |{:f}      |{:f}      ".format(i,x2,abs(x2-x1))
+        arch.write(txt +'\n')
+        if abs(x2-x1) < error:
+            break
+        x1 = x2
+    return x2
+
+def valores():
+    while True:   
+        try:
+            x_0 = float(input("Ingrese x0 basandose en la grafica: "))
+            break
+        except ValueError:
+            print("Ingrese el dato numerico  de nuevo")
+            
+    while True:
+        try:
+            error = float(input("Ingrese la precisión(0,1) Valores decimae¿les entre el rango:"))
+            if((error > 0 ) & (error <= 1)):
+                break
+            else:
+                print("Solo puede ingresar un digito  mayor que 0 y menor que 1")
+        except ValueError:
+            print("Solo puede ingresar un digito  mayor que 0 y menor que 1")
+    return error,x_0
+
+import matplotlib.pyplot as plt
+import numpy as np
+import sympy as sp
+while True:
+    variable = input('Ingrese la variable: ')
+    if (' ' in variable) == False:
+        print('La variable ingresada es: ', variable)
+        break  
+x = sp.Symbol(variable)
+equa = input("Ingrese el polinomio:\t")
+f=sp.sympify(equa)
+df = sp.diff(f)
+print("La derivada es:",end ="")
+print(df)
+sp.plotting.plot(equa, show=True,title = "Grafica de la función")
+f = sp.lambdify(x,f)
+df = sp.lambdify(x,df)
+error, x_0 = valores()
+x2 = New(f,df,x_0,error)
+if(x2 != 0):
+    limi = -abs(x2 *2)
+    lims = abs(x2 *2)
+else:
+    limi = -1
+    lims =  1   
+x = np.arange(limi,lims,0.00001)
+y = f(x)   
+plt.plot(x, y, "-", linewidth=3, color = (0.2, 0.1, 0.4))
+plt.title("Grafica de la raiz")
+plt.grid()
+plt.show()
