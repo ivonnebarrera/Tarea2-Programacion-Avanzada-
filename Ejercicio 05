@@ -1,0 +1,40 @@
+import numpy as np
+import random
+import matplotlib.pyplot as tabla
+
+L=float(input("ɪɴɢʀᴇsᴇ ʟᴀ ʟᴏɴɢɪᴛᴜᴅ ᴅᴇ ʟᴏs ᴘᴀsᴏs:  "))
+N=int(input("ɪɴɢʀᴇsᴇ ʟᴀ ᴄᴀɴᴛɪᴅᴀᴅ ᴅᴇ ᴘᴀsᴏs:  "))
+
+angulos=[]
+for k in range(N):
+    angulos.append(random.uniform(0,2*np.pi))
+
+def graficarVect(x,y,u,v):
+    
+    izda = min(-1, x-1)
+    dcha = max(1, x+1)
+    abajo = min(-1, y-1)
+    arriba = max(1, y+1)
+
+    tabla.quiver([u], [v], [x], [y], angles='xy', scale_units='xy', scale=1,color=(0,1,0))
+   
+    tabla.axhline(0, color='black')
+    tabla.axvline(0, color='black')
+
+    tabla.xlim([izda, dcha])
+    tabla.ylim([abajo, arriba])
+    tabla.xlabel('x')
+    tabla.ylabel('y')
+    tabla.title('(X,y)')
+    tabla.show()
+x=0
+y=0
+u=0
+v=0
+for k in range(N):
+    x=u
+    y=v
+    u=L*np.cos(angulos[k])
+    v=L*np.sin(angulos[k])
+    tabla.quiver(u,v,x,y,color=(random.random(),random.random(),random.random()))
+tabla.show()
