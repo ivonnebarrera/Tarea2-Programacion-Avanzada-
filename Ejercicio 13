@@ -1,0 +1,18 @@
+def Hanoi (altura,TorreOrigen=1,TorreAuxiliar=2,TorreDestino=3):
+    if altura==1:
+        print (TorreOrigen,"a",TorreDestino)
+        
+    else:
+        Hanoi(altura-1,TorreOrigen,TorreDestino,TorreAuxiliar)
+        print(TorreOrigen,"a",TorreDestino)
+        Hanoi (altura-1,TorreAuxiliar,TorreOrigen,TorreDestino)
+    return
+
+x = input("Ingrese el numero de discos que desea (entre 3 y 15 OwO): ")
+while True:
+    if int(x) < 3 or int(x) > 15:
+        x = input("Intente de nuevo: ")
+    else:
+        break
+
+Hanoi(int(x))
