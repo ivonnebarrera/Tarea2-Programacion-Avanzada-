@@ -1,0 +1,15 @@
+def padovan (index):
+    if(index == 0 or index == 1 or index == 2):
+        return 1
+    else:
+        return padovan (index - 2) + padovan(index - 3)
+  
+limite = int(input("Ingrese número de elementos: "))
+i = 0
+while(i <= limite):
+    if (i == limite):
+        print(padovan(i), end ="")
+        i += 1
+    else: 
+        print("{:}, ".format(padovan(i)), end ="")
+        i += 1
