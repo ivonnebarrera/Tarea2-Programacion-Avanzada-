@@ -1,0 +1,101 @@
+def Contraseña():
+    pas = str(input("Ingresa una contraseña de 6-12 caracteres: "))
+    if (len(pas) >= 6) and (len(pas)<=12):
+        Mayuscula(pas)
+    else:
+        print("Contraseña invalida, debe tener de 6-12 caracteres: ")
+        Contraseña()
+        
+def cifrado(cadena,clave): 
+    num = '01234567890123456789'
+    car = '|°¬"/()=!#$%&?¡*-+@~{}[]`´¨^_.:,;'
+    abc = 'abcdefghijklmnñopqrstuvwxyz'
+    ABC = 'ABCDEFGHIJKLMÑOPQRSTUVXYZ'
+    txtco =''
+    for letra in cadena:
+        if (abc.find(letra) >= 1):    
+            suma = abc.find(letra) + clave
+            modulo = int(suma) % len(abc)
+            a = str(abc[modulo])
+            txtco = txtco + a
+        elif (ABC.find(letra) >= 1):
+            suma = ABC.find(letra) + clave
+            modulo = int(suma) % len(ABC)
+            a = str(ABC[modulo])
+            txtco = txtco + a
+        elif (car.find(letra) >= 1):
+            suma = car.find(letra) + clave
+            modulo = int(suma) % len(car)
+            a = str(car[modulo])
+            txtco = txtco + a
+        elif (num.find(letra) >= 1):
+            suma = num.find(letra) + clave
+            modulo = int(suma) % len(num)
+            a = str(num[modulo])
+            txtco = txtco + a
+    return txtco
+
+def Numero(pas):
+    a = 0
+    num = '0123456789'
+    for letra in pas:
+        if num.find(letra) == -1:
+            a += 1
+    if a >= len(pas):
+        print("Contraseña invalida, debe incluir almenos un numero")
+        Contraseña()
+    else:
+        print("Contraseña valida")
+        global x
+        x = pas
+
+def Caracter(pas):
+    a = 0
+    car = '|°¬"/()=!#$%&?¡*-+@~{}[]`´¨^_.:,;'
+    for letra in pas:
+        if car.find(letra) == -1:
+            a += 1
+    if a >= len(pas):
+        print("Contraseña invalida, debe incluir almenos un caracter")
+        Contraseña()
+    else:
+        Numero(pas)
+
+def Minuscula(pas):
+    a = 0
+    abc = 'abcdefghijklmnñopqrstuvwxyz'
+    for letra in pas:
+        if abc.find(letra) == -1:
+            a += 1
+    if a >= len(pas):
+        print("Contraseña invalida, debe incluir almenos una letra minuscula")
+        Contraseña()
+    else:
+        Caracter(pas)   
+    
+def Mayuscula (pas):
+    a = 0
+    ABC = 'ABCDEFGHIJKLMÑOPQRSTUVXYZ'
+    for letra in pas:
+        if ABC.find(letra) == -1:
+            a += 1
+    if a >= len(pas):
+        print("Contraseña invalida, debe incluir almenos una letra mayuscula")
+        Contraseña()
+    else:
+        Minuscula(pas)
+
+if __name__ == "__main__": 
+    print("Creacion de contraseña con cifrado ")
+    print("Considere los siguientes criterios:")
+    print("Debe contener al menos una letra minúscula [a-z]")
+    print("Debe contener al menos un número [0-9]")
+    print("Debe contener al menos una letra mayúscula [A-Z], no en la primera posición")
+    print("Debe contener al menos un caracter especial [$, #, @, _]")
+    print("Longitud mínima - máxima de la contraseña, 6-12 caracteres") 
+    import random 
+    Contraseña()
+    numero_desplazamientos=random.randint(0,20)
+    print("Numero de desplazamientos para cifrado cesar es " +str(numero_desplazamientos))
+    print("Contraseña",x)
+    print("contraseña cifrada", cifrado(x,numero_desplazamientos))
