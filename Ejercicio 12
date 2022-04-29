@@ -1,0 +1,76 @@
+surn1=str(input("Ingrese su apellido paterno: "))
+surn2=str(input("Ingrese su apellido materno: "))
+nm=str(input("Ingrese su nombre: "))
+yr=str(input("Ingrese su año de nacimiento:  "))
+mes=str(input("Ingrese su mes de nacimiento: "))
+dia=str(input("Ingrese su dia de nacimiento: "))
+sex=str(input("Sexo: "))
+print(' AGUASCALIENTES [AS] \n BAJA CALIFORNIA [BC] \n BAJA CALIFORNIA SUR [BS] \n CAMPECHE [CC] \n COAHUILA [CL] \n COLIMA [CM] \n CHIAPAS [CS] \n CHIHUAHUA [CH] \n DISTRITO FEDERAL [DF] \n DURANGO [DG] \n GUANAJUATO [GT] \n GUERRERO [GR] \n HIDALGO [HG] \n JALISCO [JC] \n ESTADO DE MÉXICO [MC] \n MICHOACÁN [MN] \n MORELOS [MS]  \n NAYARIT \t\t\t[NT] \n NUEVO LEÓN [NL] \n OAXACA [OC] \n PUEBLA [PL] \n QUERÉTARO [QT] \n QUINTANA ROO [QR] \n SAN LUIS POTOSÍ [SP] \n SINALOA [SL] \n SONORA [SR] \n TABASCO [TC] \n TAMAULIPAS [TS] \n TLAXCALA [TL] \n VERACRUZ [VZ] \n YUCATÁN [YN] \n ZACATECAS [ZS] \n NACIDO EN EL EXTRANJERO [NE] \n ')
+est=str(input("Seleccione el estado de su nacimiento:  "))
+
+surn1=surn1.upper()
+surn2=surn2.upper()
+nm=nm.upper()
+sex=sex.upper()
+est=est.upper()
+curp=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
+curp[0]=surn1[0]
+c=ord(surn1[1])
+c2=ord(surn1[2])
+if c==65 or c==69 or c==73 or c==79 or c==85:
+    curp[1]=surn1[1]
+else: 
+    curp[1]=surn1[2]
+    
+curp[2]=surn2[0]
+curp[3]=nm[0]
+curp[4]=yr[2]
+curp[5]=yr[3]
+
+if len(mes)==1:
+    curp[6]=0
+    curp[7]=mes[0]
+else:
+    curp[6]=mes[0]
+    curp[7]=mes[1]
+
+if len(dia)==1:
+    curp[8]=0
+    curp[9]=dia[0]
+else:
+    curp[8]=dia[0]
+    curp[9]=dia[1]
+
+curp[10]=sex[0]
+curp[11]=est[0]
+curp[12]=est[1]
+
+c=ord(surn1[1])
+c2=ord(surn1[2])
+if c!=65 and c!=69 and c!=73 and c!=79 and c!=85:
+    curp[13]=surn1[1]
+elif c2!=65 and c2!=69 and c2!=73 and c2!=79 and c2!=85:
+    curp[13]=surn1[2]
+else: 
+    curp[13]=surn1[3]
+
+c=ord(surn2[1])
+c2=ord(surn2[2])
+if c!=65 and c!=69 and c!=73 and c!=79 and c!=85:
+    curp[14]=surn2[1]
+elif c2!=65 and c2!=69 and c2!=73 and c2!=79 and c2!=85:
+    curp[14]=surn2[2]
+else: 
+    curp[14]=surn2[3]
+
+c=ord(nm[1])
+c2=ord(nm[2])
+if c!=65 and c!=69 and c!=73 and c!=79 and c!=85:
+    curp[15]=nm[1]
+elif c2!=65 and c2!=69 and c2!=73 and c2!=79 and c2!=85:
+    curp[15]=nm[2]
+else: 
+    curp[15]=nm[3]
+
+print("\tSu CURP es:\n")
+print(curp)
